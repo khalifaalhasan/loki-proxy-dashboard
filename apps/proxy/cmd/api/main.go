@@ -1,32 +1,33 @@
 package main
 
 import (
+	"fmt"
 	"log"
-
-	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/cors"
-	"github.com/gofiber/fiber/v2/middleware/logger"
+	"proxy-dashboard/internal/config"
+	"proxy-dashboard/internal/database"
+	"proxy-dashboard/internal/server"
 )
 
 func main () {
-	app := fiber.New(fiber.Config{
-		AppName: "Dashboard API Proxy V1",
-	})
+	// load config
+	config.LoadEnv()
 
-	app.Use(logger.New())
-	app.Use(cors.New(cors.Config{
-		AllowOrigins: "*",
-		AllowHeaders: "origin, Content-Type, Accept, Authorization",
-	}))
+	// init DB
+	dbConn := config.InitDB()
+	defer dbConn.Close()
+	queries := database.New(dbConn)
 
-	api := app.Group("/api")
-	api.Get("/health", func(c *fiber.Ctx) error{
-		return c.Status(200).JSON(fiber.Map{
-			"status": "UP",
-			"message": "Fiber Backend is running",
-		})
-	})
+	// server build
+	frontendURL := config.GetEnv("FRONTEND_URL", "*")
+	srv := server.NewServer(queries, frontendURL)
 
-	log.Println("API Proxy Running on localhost:3000")
-	log.Fatal(app.Listen(":3000"))
+	// turnOn Server
+	port := config.GetEnv("PORT", "3000")
+	serverAddr := fmt. Sprintf(":%s", port)
+
+	log.Printf("API Proxy Running on localhost:%s\n", port)
+
+	if err := srv.Start(serverAddr); err != nil {
+		log.Fatalf("Server Crashed: %v", err)
+	}
 }
