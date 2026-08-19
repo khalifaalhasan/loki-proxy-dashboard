@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "go run cmd/api/main.go",
     "build": "go build -o bin/api cmd/api/main.go",
-    "start": "./bin/api"
+    "start": "./bin/api",
+    "migrate:up": "migrate -path sql/migrations -database \"sqlite3://./dashboard.db\" up",
+    "migrate:down": "migrate -path sql/migrations -database \"sqlite3://./dashboard.db\" down"
   },
   "keywords": [],
   "author": "",
