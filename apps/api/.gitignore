@@ -1,0 +1,32 @@
+# ========================
+# 1. GO COMPILED BINARIES
+# ========================
+# Jangan pernah commit hasil build Go!
+/bin/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+*.app
+
+# ========================
+# 2. GO WORKSPACES & VENDORING
+# ========================
+go.work
+go.work.sum
+/vendor/
+
+# ========================
+# 3. GO TEST REPORTS
+# ========================
+coverage.out
+coverage.html
+profile.out
+
+# ========================
+# 4. LOCAL ENV KUSUS API
+# ========================
+.env

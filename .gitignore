@@ -1,0 +1,43 @@
+# ========================
+# 1. NODE & PACKAGE MANAGER
+# ========================
+node_modules/
+.pnpm-store/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ========================
+# 2. TURBOREPO CACHE
+# ========================
+.turbo/
+
+# ========================
+# 3. BUILD OUTPUTS (Frontend Vue)
+# ========================
+dist/
+dist-ssr/
+build/
+coverage/
+
+# ========================
+# 4. ENVIRONMENT VARIABLES (HARAM DI-COMMIT!)
+# ========================
+.env
+.env.local
+.env.*.local
+*.pem
+
+# ========================
+# 5. OS & IDE LOGS
+# ========================
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp

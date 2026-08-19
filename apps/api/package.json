@@ -1,0 +1,15 @@
+{
+  "name": "@api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "go run cmd/api/main.go",
+    "build": "go build -o bin/api cmd/api/main.go",
+    "start": "./bin/api"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
